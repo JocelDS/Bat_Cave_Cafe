@@ -1,0 +1,1239 @@
+/* ------------------------------------------------
+   GLOBAL RESET (CRITICAL FIX)
+   This prevents the inputs from stretching wider than the box
+   ------------------------------------------------ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ------------------------------------------------
+   THEME & VARIABLES
+   (FIXED: Added colors for success/danger)
+   ------------------------------------------------ */
+:root {
+  --color-base: #2B2B2B;
+  --color-accent: #DDA441;
+  --color-text: #F5EDE1;
+  --color-surface: #3A3A3A;
+  --color-deep-bg: #121212;
+  --color-danger: #800000; /* Dark Red for errors/removal */
+  --color-success: #008000; /* Dark Green for success */
+  --font-main: 'Inter', sans-serif;
+}
+
+/* Page Layout */
+body {
+  font-family: var(--font-main);
+  display: flex; 
+  justify-content: flex-start;
+  align-items: stretch;
+  min-height: 100vh;
+  background: var(--color-deep-bg);
+  margin: 0;
+}
+
+/* ------------------------------------------------
+   LOGIN CARD WRAPPER (Kept for login.php)
+   ------------------------------------------------ */
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  color: var(--color-text);
+  border-radius: 12px;
+  padding: 30px 40px;
+  margin: 20px;
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+  color: var(--color-accent);
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* ------------------------------------------------
+   INPUT FIELDS
+   ------------------------------------------------ */
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.login__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 50px 0 20px; 
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.input-box input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 8px rgba(221, 164, 65, 0.4);
+}
+
+.input-box input::placeholder {
+  color: rgba(245, 237, 225, 0.5);
+  font-weight: 400;
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  bottom: 14px;
+  font-size: 20px;
+  color: var(--color-accent);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------
+   REMEMBER ME & LINKS
+   ------------------------------------------------ */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: -10px 0 25px;
+  color: #ccc;
+}
+
+.remember-forgot label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-forgot input[type="checkbox"] {
+    accent-color: var(--color-accent);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.remember-forgot a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------
+   BUTTONS
+   ------------------------------------------------ */
+.btn {
+  width: 100%;
+  height: 48px;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--color-base);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #e6b863;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(221, 164, 65, 0.4);
+}
+
+/* ------------------------------------------------
+   DASHBOARD LAYOUT
+   ------------------------------------------------ */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ------------------ SIDEBAR ------------------ */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background: var(--color-surface);
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.sidebar .logo-details {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sidebar .logo-details .bx-bat {
+    font-size: 30px;
+    color: var(--color-accent);
+    min-width: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar .logo-details .logo_name {
+    color: var(--color-text);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.sidebar .nav-links {
+    height: 100%;
+    padding: 30px 0 150px 0;
+    overflow: auto;
+}
+
+.sidebar .nav-links li {
+    list-style: none;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li:hover {
+    background: var(--color-base);
+    border-radius: 4px;
+}
+
+.sidebar .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 4px;
+    color: var(--color-text);
+    padding: 10px 0;
+    white-space: nowrap;
+    transition: all 0.4s ease;
+}
+
+.sidebar .nav-links li a i {
+    height: 35px;
+    min-width: 50px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 18px;
+}
+
+.sidebar .nav-links li a .link_name {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.sidebar .nav-links li a.active {
+    color: var(--color-base); 
+    font-weight: 600;
+}
+
+.sidebar .nav-links li:has(a.active) {
+    background: var(--color-accent);
+    border-radius: 4px;
+}
+.sidebar .nav-links li:has(a.active) a {
+    color: var(--color-base);
+}
+.sidebar .nav-links li:has(a.active) a i {
+    color: var(--color-base);
+}
+
+.sidebar .nav-links li:hover:not(:has(a.active)) {
+    background: var(--color-base);
+    border-radius: 4px;
+}
+
+
+/* ------------------ MAIN CONTENT ------------------ */
+.home-section {
+    position: relative;
+    background: var(--color-deep-bg);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    left: 250px;
+    transition: all 0.5s ease;
+}
+
+/* Header/Nav Bar */
+.home-section nav {
+    height: 70px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px 0 24px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.home-section nav .sidebar-button {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.home-section nav .profile-details {
+    display: flex;
+    align-items: center;
+    background: var(--color-base);
+    border: 2px solid var(--color-accent);
+    border-radius: 6px;
+    height: 40px;
+    padding: 0 15px;
+}
+
+.home-section nav .profile-details .admin_name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-right: 10px;
+}
+
+.home-section nav .profile-details i {
+    font-size: 22px;
+    color: var(--color-accent);
+}
+
+/* Main Content Area */
+.home-content {
+    padding: 25px 0; 
+}
+
+.home-content h2 {
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 24px;
+    padding: 0 40px;
+}
+
+/* Overview Boxes (KPIs) */
+.overview-boxes {
+    padding: 0 40px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.overview-boxes .box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(25% - 15px);
+    background: var(--color-surface);
+    padding: 20px 24px;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+}
+
+.overview-boxes .box-topic {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.home-content .box .number {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 5px;
+    color: var(--color-accent);
+}
+
+.home-content .box .indicator {
+    display: flex;
+    align-items: center;
+}
+
+.home-content .box .indicator i {
+    height: 20px;
+    width: 20px;
+    background: #008000;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.box .indicator .down {
+    background: #800000;
+}
+
+.box .indicator .text {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.home-content .box .cart {
+    font-size: 35px;
+    color: var(--color-accent);
+}
+
+.home-content .box .cart.four { 
+    background: var(--color-accent);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-base);
+    font-size: 30px;
+}
+
+.action-cell {
+    text-align: center; 
+    white-space: nowrap;
+}
+
+/* Base style for ALL action buttons */
+.action-cell a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 0 3px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-cell a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Specific Button Styles (Color Coding) --- */
+
+.action-btn.view {
+    background-color: #3498db;
+}
+
+.btn-approve {
+    background-color: #2ecc71;
+}
+
+.btn-reject {
+    background-color: #e74c3c;
+}
+
+.btn-cancel {
+    background-color: #f39c12;
+}
+
+.action-btn.view:hover {
+    background-color: #2980b9;
+}
+
+.btn-approve:hover {
+    background-color: #27ae60;
+}
+
+.btn-reject:hover {
+    background-color: #c0392b;
+}
+
+.btn-cancel:hover {
+    background-color: #d8890c;
+}
+
+.action-cell {
+    color: #95a5a6;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.status-badge.cancelled {
+    background-color: #555555;
+    color: #fff;
+}
+
+/* Sales and Menu Boxes */
+.sales-boxes {
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.sales-boxes .box {
+    background: var(--color-surface);
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: var(--color-text);
+}
+
+.sales-boxes .recent-sales {
+    width: 65%;
+}
+
+.sales-boxes .top-menu {
+    width: calc(35% - 20px);
+}
+
+.sales-boxes .title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--color-accent);
+}
+
+.sales-boxes .sales-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sales-details .details {
+    width: calc(100% / 3);
+    list-style: none;
+    padding: 0;
+}
+
+.sales-details .details .topic {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.sales-details .details li {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.sales-details .details li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.sales-details .details li a:hover {
+    color: var(--color-accent);
+}
+
+/* Top Menu List */
+.top-menu .menu-details {
+    list-style: none;
+    padding: 0;
+}
+
+.top-menu .menu-details li {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.top-menu .menu-details li a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.top-menu .menu-details li .price {
+    color: #ccc;
+}
+
+.sales-details.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.quick-link-item {
+    display: flex;
+    align-items: center;
+    background: var(--color-surface);
+    padding: 12px 15px;
+    border-radius: 4px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.quick-link-item:hover {
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-weight: 600;
+}
+
+.quick-link-item i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: var(--color-accent);
+}
+
+.quick-link-item:hover i {
+    color: var(--color-surface);
+}
+
+/* ------------------ RESPONSIVENESS ------------------ */
+@media (max-width: 990px) {
+    .sidebar {
+        width: 60px;
+        padding: 6px 0;
+    }
+    .home-section {
+        width: calc(100% - 60px);
+        left: 60px;
+    }
+    .overview-boxes .box {
+        width: calc(33% - 15px);
+    }
+    .sales-boxes .recent-sales,
+    .sales-boxes .top-menu {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .sales-boxes {
+        flex-direction: column;
+    }
+    .overview-boxes,
+    .sales-boxes {
+        padding: 0 20px; 
+    }
+    .home-content h2 {
+        padding: 0 20px;
+    }
+    .manager-container {
+        margin: 25px 20px 0 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .home-content .overview-boxes .box {
+        width: calc(50% - 10px);
+    }
+    .overview-boxes,
+    .sales-boxes {
+        padding: 0 15px;
+    }
+    .home-content h2 {
+        padding: 0 15px;
+    }
+    .sales-details.quick-links-grid {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    .manager-container {
+        margin: 25px 15px 0 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .home-content .overview-boxes .box {
+        width: 100%;
+    }
+    .overview-boxes,
+    .sales-boxes {
+        padding: 0 10px;
+    }
+    .home-content h2 {
+        padding: 0 10px;
+    }
+    .manager-container {
+        margin: 25px 10px 0 10px;
+    }
+    .add-form {
+        flex-direction: column;
+    }
+    .add-form select,
+    .add-form button {
+        width: 100% !important;
+    }
+}
+
+/* ------------------------------------------------
+   ADMIN MANAGER & RESERVATION LIST STYLES
+   ------------------------------------------------ */
+
+/* Full Width Box for Dashboard List/Table */
+@media (min-width: 991px) {
+    .home-content .recent-sales.box.full-width-box {
+        width: 100% !important; 
+    }
+}
+
+/* Style for Recent Reservations Table */
+.recent-reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.recent-reservations-table th, 
+.recent-reservations-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recent-reservations-table th {
+    font-weight: 600;
+    color: var(--color-accent);
+    background: var(--color-base);
+}
+
+.recent-reservations-table td {
+    color: var(--color-text);
+}
+
+.recent-reservations-table tr:hover {
+    background-color: rgba(221, 164, 65, 0.1);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.status-badge.pending {
+    background-color: #DDA441;
+    color: var(--color-base);
+}
+
+.status-badge.approved {
+    background-color: #008000;
+    color: #fff;
+}
+
+.status-badge.rejected {
+    background-color: #800000;
+    color: #fff;
+}
+
+.status-badge.cancelled {
+    background-color: #555555;
+    color: #fff;
+}
+
+/* 3-Column Grid for Quick Links */
+@media (min-width: 991px) {
+    .sales-details.quick-links-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px; 
+    }
+}
+
+/* Quick Link Custom Colors */
+.quick-link-item.logout-link {
+    background-color: #800000;
+}
+
+.quick-link-item.logout-link i {
+    color: #fff;
+}
+
+.quick-link-item.logs-link {
+    background-color: var(--color-surface);
+}
+
+.quick-link-item.logs-link i {
+    color: var(--color-accent);
+}
+
+.quick-link-item.admin-manager-link {
+    background-color: #4A90E2;
+}
+
+.quick-link-item.admin-manager-link i {
+    color: #fff;
+}
+
+/* Specific CSS for the Bookings Table */
+        .bookings-table-container {
+            overflow-x: auto;
+            background: var(--color-surface);
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 0 40px; 
+        }
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--color-text);
+            white-space: nowrap;
+        }
+        .bookings-table th, .bookings-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-base);
+        }
+        .bookings-table th {
+            background-color: var(--color-base);
+            color: var(--color-accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .bookings-table tr:hover {
+            background-color: #4A4A4A;
+        }
+        .status-tag {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .status-Pending { background-color: #DDA441; color: var(--color-base); } 
+        .status-Confirmed { background-color: #008000; color: #fff; } 
+        .status-Rejected { background-color: #800000; color: #fff; } 
+
+        .action-btns a {
+            padding: 6px 10px;
+            margin-right: 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        .action-btns i {
+            margin-right: 5px;
+        }
+        .btn-view { background-color: var(--color-accent); color: var(--color-base); }
+        .btn-approve { background-color: #008000; color: #fff; }
+        .btn-reject { background-color: #800000; color: #fff; }
+        .filter-controls {
+            margin: 0 40px 20px 40px;
+            display: flex;
+            gap: 15px;
+        }
+        .filter-controls a {
+            background: var(--color-surface);
+            color: var(--color-text);
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .filter-controls a.active, .filter-controls a:hover {
+            background: var(--color-accent);
+            color: var(--color-base);
+        }
+
+        .status-tag.status-done {
+    background: #198754;
+    color: #fff;
+}
+.status-tag.status-confirmed {
+    background: #0d6efd;
+    color: #fff;
+}
+
+/* --- BUTTON STYLES --- */
+.action-btns .btn-done {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.action-btns .btn-done:hover {
+    background-color: #1e7e34;
+}
+
+/* ------------------------------------------------
+   Booking Page Header & Button Styles
+   ------------------------------------------------ */
+.heading-with-button {
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.heading-with-button h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.btn-create-booking {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color-accent);
+    color: var(--color-base);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+.btn-create-booking i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.btn-create-booking:hover {
+    background-color: #e6b863;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 700px) {
+    .heading-with-button {
+        padding: 0 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .heading-with-button h2 {
+        width: 100%; 
+    }
+    .btn-create-booking {
+        width: 100%; 
+        justify-content: center;
+    }
+}
+
+
+        /* General form and container styles */
+        .content-box-menu {
+            background: var(--color-surface);
+            padding: 30px;
+            border-radius: 6px;
+            margin: 20px 40px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            color: var(--color-text);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-group input[type="text"], 
+        .form-group input[type="number"], 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--color-base);
+            border-radius: 4px;
+            background: var(--color-base);
+            color: var(--color-text);
+            box-sizing: border-box;
+        }
+        .price-group {
+             display: flex;
+             gap: 15px;
+        }
+        .price-group > div {
+             flex: 1;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        .btn-submit {
+            padding: 10px 20px;
+            background: var(--color-accent);
+            color: var(--color-base);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-submit:hover {
+            background: #ffc966;
+        }
+        .btn-cancel {
+            padding: 10px 20px;
+            background: #555;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 1;
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-delete { background-color: #800000; color: #fff; }
+        .btn-add { background-color: #008000; color: #fff; }
+
+        /* Category Management Styles */
+        .category-management {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px dashed var(--color-border);
+            border-radius: 6px;
+        }
+        .category-management h4 {
+            margin-top: 0;
+            color: var(--color-accent);
+        }
+        .category-management .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .category-management .category-tag {
+            background: #3a3a3a;
+            color: var(--color-text);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+        .category-management .category-tag a {
+            color: #ff6347;
+            margin-left: 8px;
+            text-decoration: none;
+        }
+
+        /* List View (Table) Styles */
+        .item-list-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .item-list-table th, .item-list-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-base);
+        }
+        .item-list-table th {
+            background-color: var(--color-base);
+            color: var(--color-accent);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .item-list-table tr:hover {
+            background-color: #4A4A4A;
+        }
+        .item-list-table .item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .item-list-table .category-header {
+            background-color: #1a1a1a;
+            color: var(--color-border);
+            font-size: 1.1em;
+            font-weight: 700;
+            text-align: center;
+        }
+        .item-actions a {
+             padding: 6px 10px;
+             margin-right: 5px;
+             border-radius: 4px;
+             text-decoration: none;
+             font-size: 13px;
+             transition: background-color 0.3s;
+             display: inline-flex;
+             align-items: center;
+        }
+        
+        /* Specific styles for table action buttons */
+        .item-actions .btn-edit-item {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+        }
+        .item-actions .btn-edit-item:hover {
+            background-color: #e6b863;
+        }
+
+        .item-actions .btn-delete-item {
+            background-color: #800000;
+            color: #fff;
+        }
+        .item-actions .btn-delete-item:hover {
+            background-color: #c00000;
+        }
+        /* Style for prices in the list view */
+        .price-display p {
+            margin: 0;
+            line-height: 1.2;
+            font-size: 0.9em;
+        }
+        .price-display strong {
+            display: inline-block;
+            width: 15px;
+        }
+        
+        /* ------------------------------------------------
+           BEST SELLER MANAGER STYLES (New/Fixed)
+           ------------------------------------------------ */
+
+        .manager-container {
+            margin: 25px 40px 0 40px; 
+            padding: 30px; 
+            background: var(--color-surface); /* Changed to surface for consistency */
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            color: var(--color-text);
+        }
+        
+        .current-list {
+            margin-top: 20px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 20px;
+            padding: 0;
+        }
+        .list-item {
+            background: var(--color-base); /* Darker background for list item */
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            margin: 0; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .list-item h4 {
+             margin: 8px 0 5px 0;
+             color: var(--color-accent);
+             font-size: 1.1em;
+        }
+        .list-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .list-item .btn-remove {
+            background-color: var(--color-danger); /* Uses the defined variable */
+            color: white;
+            padding: 8px 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .list-item .btn-remove:hover {
+             background-color: #c00000;
+        }
+        
+        /* Form for Adding Best Seller */
+        .add-form {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 20px; 
+            border: 2px dashed var(--color-accent); /* Made border more visible */
+            border-radius: 6px;
+            margin-bottom: 30px;
+            margin-top: 15px;
+            background: var(--color-base);
+        }
+        .add-form select {
+            width: 70%; 
+            background: var(--color-surface); /* Use surface color for select background */
+            border: 1px solid var(--color-accent);
+            color: var(--color-text);
+            padding: 10px;
+            border-radius: 4px;
+            height: 40px;
+        }
+        .add-form button {
+             width: 30%; 
+             padding: 10px;
+             border-radius: 4px;
+             /* Inherits primary .btn style if class is applied in HTML */
+             height: 40px;
+             line-height: 1; /* Adjust vertical alignment */
+             font-weight: 600;
+             cursor: pointer;
+        }
+        
+        /* Alert Styles using defined variables */
+        .alert-success {
+            background-color: var(--color-success); 
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .alert-error {
+            background-color: var(--color-danger); 
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .alert-error p {
+            margin: 0;
+        }
