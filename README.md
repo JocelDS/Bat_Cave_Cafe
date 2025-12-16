@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="BAT_CAVE_CAFE Logo" width="120" />
+<img src="assets/image - Copy.png" alt="BAT_CAVE_CAFE Logo" width="120" />
 
 # **BAT_CAVE_CAFE**
 
@@ -9,8 +9,6 @@
 Built with the tools and technologies
 
 ![PHP](https://img.shields.io/badge/PHP-8%2B-blue)
-![CSS](https://img.shields.io/badge/CSS3-Styling-blueviolet)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
 ![CSS](https://img.shields.io/badge/CSS3-Styling-blueviolet)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
 
