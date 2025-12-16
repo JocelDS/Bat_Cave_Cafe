@@ -9,7 +9,7 @@
 Built with the tools and technologies
 
 ![PHP](https://img.shields.io/badge/PHP-8%2B-blue)
-![Composer](https://img.shields.io/badge/Composer-Required-orange)
+
 
 </div>
 
