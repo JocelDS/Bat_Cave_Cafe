@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/image - Copy.png" alt="BAT_CAVE_CAFE Logo" width="120" />
+<img src="logo.png" alt="BAT_CAVE_CAFE Logo" width="120" />
 
 # **BAT_CAVE_CAFE**
 
@@ -9,7 +9,10 @@
 Built with the tools and technologies
 
 ![PHP](https://img.shields.io/badge/PHP-8%2B-blue)
-
+![CSS](https://img.shields.io/badge/CSS3-Styling-blueviolet)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![CSS](https://img.shields.io/badge/CSS3-Styling-blueviolet)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
 
 </div>
 
@@ -47,16 +50,17 @@ This project aims to simplify cafe operations through an integrated platform. Th
 
 ### Prerequisites
 
-This project requires the following dependencies:
+This project requires the following:
 
 * **Programming Language**: PHP
-* **Package Manager**: Composer
+* **Frontend Technologies**: HTML, CSS, JavaScript
+* **Web Server**: Apache / XAMPP / PHP built-in server
 
 ---
 
 ### Installation
 
-Build **Bat_Cave_Cafe** from the source and install dependencies:
+Build **Bat_Cave_Cafe** from the source:
 
 1. **Clone the repository**
 
@@ -70,11 +74,10 @@ Build **Bat_Cave_Cafe** from the source and install dependencies:
    cd Bat_Cave_Cafe
    ```
 
-3. **Install the dependencies**
+3. **Move the project to your server directory**
 
-   ```bash
-   composer install
-   ```
+   * For XAMPP: `htdocs/`
+   * For LAMP: `/var/www/html/`
 
 ---
 
@@ -92,11 +95,12 @@ Access the application via your browser to manage menus, reservations, and conte
 
 ### Testing
 
-Bat_Cave_Cafe uses the **Pest** testing framework. Run the test suite with:
+Manual testing is performed by validating core features such as:
 
-```bash
-vendor/bin/pest
-```
+* User authentication
+* Reservation submission and validation
+* Admin dashboard operations
+* Dynamic content rendering
 
 ---
 
