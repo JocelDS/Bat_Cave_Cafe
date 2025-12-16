@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="BAT_CAVE_CAFE Logo" width="120" />
+<img src="assets/image - Copy.png" alt="BAT_CAVE_CAFE Logo" width="120" />
 
 # **BAT_CAVE_CAFE**
 
